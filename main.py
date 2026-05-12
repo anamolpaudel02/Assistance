@@ -79,17 +79,17 @@ def process_command(command):
     elif "news" in command.lower():
         r = requests.get(f"https://newsapi.org/v2/top-headlines?country=np&apiKey={newsapi}")
         if r.status_code == 200:
-            # Parse the JSON response
+            #  JSON response
             data = r.json()
             
             # Extract the articles
             articles = data.get('articles', [])
             
-            # Print the headlines
+            # Speak the headlines
             for article in articles:
                 speak(article['title'])
     else:
-        # Let OpenAI handle the request
+        # OpenAI  will handle
         output = aiProcess(command)
         speak(output) 
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     speak("Initializing Assistance....")
 
     while True:
-        # obtain audio from the microphone
+        # obtain audio 
         r = sr.Recognizer()
 
         print("Processing audio...")
@@ -110,7 +110,7 @@ if __name__ == "__main__":
             word = r.recognize_google(audio)
             if(word.lower() == "assistance"):
                 speak("Ya")
-                # Listen for command
+                # Listen 
                 with sr.Microphone() as source:
                     print("Assistance Active...")
                     audio = r.listen(source)
